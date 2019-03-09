@@ -1,0 +1,58 @@
+*******************************************************************************
+Tema2 - PA
+Matei Bianca - Larisa -> 322CB
+*******************************************************************************
+
+-------------------------------------------------------------------------------
+Task1 -> minlexbfs.cpp
+-------------------------------------------------------------------------------
+Pentru implementarea primului task, am implementat listele de adiacenta adj
+folosind priority_queue, pentru a retine vecinii fiecarui nod in ordine 
+crescatoare. Dupa aceea, am parcurs graful folosind BFS, pornind din nodul 1.
+Retin parcurgerea BFS in vectorul d, pe care il afisez la final. Pentru 
+parcurgerea BFS, am folosit un vector visited pe care l-am initializat cu 
+false si o coada queue in care adaug pentru inceput nodul de start. Cat timp
+mai am noduri de prelucrat (coada nu este vida), determin nodul din varful 
+cozii, il adaug in vectorul in care retin parcurgerea BFS (d) si elimin nodul
+din coada. Dupa aceea, parcurg toti vecinii nodului, iar daca un vecin nu a 
+fost vizitat, il marchez ca fiind vizitat si il adaug in coada. In final, 
+returnez vectorul care contine parcurgerea BFS.
+===============================================================================
+Complexitate (BFS): O(N + M), unde N este numarul de noduri si M este numarul
+                    de muchii.
+===============================================================================
+-------------------------------------------------------------------------------
+Task2 -> disjcnt.cpp
+-------------------------------------------------------------------------------
+Pentru inceput, citesc numarul de noduri si de muchii si creez listele de 
+adiacenta. Pentru rezolvarea acestui task, am aplicat Algoritmul lui Tarjan
+pentru a determina muchiile critice (puntile) din graf. Retin aceste muchii in
+vectorul de perechi critical_edges. Pentru implementarea algoritmului lui 
+Tarjan, m-am folosit de parcurgerea DFS. Dupa ce am aflat muchiile critice, le 
+elimin din graf (le sterg din listele de adiacenta). Dupa aceea, voi avea
+mai multe componente conexe, pe care le parcurg cu BFS (retin parcurgerile in
+vectorul d). Pentru a determina numarul de perechi de noduri, am calculat suma
+combinarilor de n luate cate 2, unde n reprezinta numarul de noduri pe care le 
+are fiecare componenta conexa. In final, returnez numarul de perechi si il 
+afisez.
+===============================================================================
+Complexitate (Tarjan):  O(N + M), unde N este numarul de noduri si M este 
+                        numarul de muchii.
+===============================================================================
+-------------------------------------------------------------------------------
+BONUS -> revedges.cpp
+-------------------------------------------------------------------------------
+Pentru inceput, am initializat matricea de adiacenta (distances) cu -1 si 0 pe
+diagonala principala. Apoi, am citit fiecare muchie (x, y) si am completat 
+matricea de adiacenta. Daca am muchie de la x la y, distances[x][y] = 0 (nu 
+este nevoie sa schimb orientarea) si distances[y][x] = 1 (poate fi nevoie sa 
+schimb orientarea). Am salvat cele Q query-uri in vectorul de perechi edges.
+Dupa aceea, am aplicat Algoritmul lui Floyd-Warshall pentru a afla distantele
+minime (atunci cand trebuie sa schimb orientarea, "distanta" este 1, iar cand 
+nu trebuie sa schimb orientarea, "distanta" este 0). In final, parcurg vectorul
+de query-uri si pentru fiecare muchie (x, y), adaug in vectorul de rezultate 
+distances[x][y], adica numarul minim de muchii pe care trebuie sa le intorc 
+astfel incat sa existe cel putin un drum de la x la y.
+===============================================================================
+Complexitate (Floyd-Warshall):  O(N ^ 3), unde N este numarul de noduri.
+===============================================================================
